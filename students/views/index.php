@@ -1,15 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student List</title>
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
-
 
     <?php
     //   session_start();
@@ -19,15 +43,12 @@
 
     include_once './../../vendor/autoload.php';
 
-    use Project\Controller\Student;
+    use Project\Controller\student;
 
     $studentObject = new Student();
 
     $students = $studentObject->index();
     ?>
-
-    <a href="./create.php">Create</a>
-
 
     <?php
     if (isset($_SESSION['message'])) {
@@ -36,9 +57,11 @@
     }
 
     ?>
+  
+       <button style="margin-left: 80%; margin-bottom:8px;" > <a href="./create.php">Create</a> </button>
 
 
-    <table border="1" style="color:blue;text-align:center; width: 500px; margin:10px;">
+    <table id="customers">
         <tr>
             <th>SL</th>
             <th>Student ID</th>
@@ -56,14 +79,14 @@
                     <td> <?= ++$sl ?></td>
                     <td> <?php echo $student['student_id'] ?></td>
                     <td> <?php echo $student['name'] ?></td>
-                    <td><a href="show.php?id=<?= $student['id'] ?>">Show</a>
-                        <a href="edit.php?id=<?= $student['id'] ?>">Edit</a>
-                        <a href="delete.php?id=<?= $student['id'] ?>">Delete</a>
+                    <td>
+                       <button style="background-color: #787491; font-size: 20px;"> <a href="show.php?id=<?= $student['id'] ?>">Show</a> </button>
+                       <button style="background-color: #1c802d; font-size: 20px;"> <a href="edit.php?id=<?= $student['id'] ?>">Edit</a> </button>
+                       <button style="background-color: #9c120b; font-size: 20px;"><a href="delete.php?id=<?= $student['id'] ?>">Delete</a> </button>
                     </td>
                 </tr>
 
             <?php } ?>
-        </tbody>
     </table>
 
 </body>
